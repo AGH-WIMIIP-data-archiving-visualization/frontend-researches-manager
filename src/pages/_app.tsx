@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AuthGuardProvider from "../providers/AuthGuardProvider";
+import { MainLayout } from "@/src/layouts";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const providerConfig: Auth0ProviderOptions = {
@@ -26,7 +27,9 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Auth0Provider {...providerConfig}>
       <AuthGuardProvider>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
         </QueryClientProvider>
       </AuthGuardProvider>
     </Auth0Provider>

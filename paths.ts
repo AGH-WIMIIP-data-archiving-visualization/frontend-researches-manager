@@ -1,8 +1,8 @@
 export const paths = {
   public: {
-    pathname: "",
+    pathname: "/",
   },
   private: {
-    pathname: "",
+    pathname: "/private",
   },
 };

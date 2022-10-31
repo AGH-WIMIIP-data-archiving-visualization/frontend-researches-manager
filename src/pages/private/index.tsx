@@ -1,16 +1,19 @@
+import { useProjects } from "@/src/api";
 import { Container } from "@/src/components";
 import { Typography } from "antd";
 import React from "react";
 const { Title } = Typography;
 
-const PublicScope = () => {
+const PrivateScope = () => {
+  const { data } = useProjects();
   return (
     <Container>
       <Title type="secondary" level={3}>
-        Public Scope
+        Private Scope
       </Title>
+      {data && data.map((e) => e.projectName)}
     </Container>
   );
 };
 
-export default PublicScope;
+export default PrivateScope;

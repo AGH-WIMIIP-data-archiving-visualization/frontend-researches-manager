@@ -11,6 +11,7 @@ export const Hamburger = styled(MenuOutlined)`
 `;
 export const HeaderWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   position: sticky;
   width: 100%;
   height: 96px;
