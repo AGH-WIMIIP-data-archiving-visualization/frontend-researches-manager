@@ -7,7 +7,7 @@ const PublicScope = () => {
   return (
     <Container>
       <Title type="secondary" level={3}>
-        Public Scope
+        Projects
       </Title>
     </Container>
   );
