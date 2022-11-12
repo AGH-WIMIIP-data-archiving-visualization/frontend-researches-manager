@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import AuthGuardProvider from "../providers/AuthGuardProvider";
 import { MainLayout } from "@/src/layouts";
 import { useRef } from "react";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "../styles/theme";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const providerConfig: Auth0ProviderOptions = {
@@ -30,9 +32,11 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Auth0Provider {...providerConfig}>
       <AuthGuardProvider>
         <QueryClientProvider client={queryClient.current}>
-          <MainLayout>
-            <Component {...pageProps} />
-          </MainLayout>
+          <ThemeProvider theme={theme}>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ThemeProvider>
         </QueryClientProvider>
       </AuthGuardProvider>
     </Auth0Provider>

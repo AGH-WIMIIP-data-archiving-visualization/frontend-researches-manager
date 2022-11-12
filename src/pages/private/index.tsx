@@ -11,6 +11,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Form, Modal, Typography } from "antd";
 import React, { useState } from "react";
 const { Title } = Typography;
+import NextLink from "next/link";
+import { paths } from "@/src/paths";
 
 const PrivateScope = () => {
   const { data, refetch, isLoading } = useGetProjects();
@@ -34,7 +36,7 @@ const PrivateScope = () => {
         okButtonProps={{ loading: isLoading }}
         title={<b>Add project</b>}
         destroyOnClose
-        visible={showModalAddProject}
+        open={showModalAddProject}
         onOk={() => {
           submit();
         }}
@@ -55,7 +57,19 @@ const PrivateScope = () => {
           onClick={() => setShowModalAddProject(true)}
           text={"+ new project"}
         />
-        {data && data.map((e) => <ProjectTile key={e.id} {...e} />)}
+
+        {data &&
+          data.map((e) => (
+            <NextLink
+              key={e.id}
+              passHref
+              href={paths.project.go({ projectId: e.id })}
+            >
+              <a>
+                <ProjectTile key={e.id} {...e} />
+              </a>
+            </NextLink>
+          ))}
       </TileGrid>
     </Container>
   );

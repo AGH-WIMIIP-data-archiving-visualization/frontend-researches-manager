@@ -2,7 +2,7 @@ import React from "react";
 import { HeaderWrapper, Hamburger, Menu } from "./styles";
 import { HeaderProps } from "./types";
 import { Link } from "@/src/components";
-import { paths } from "@/paths";
+import { paths } from "@/src/paths";
 import { useAuth0 } from "@auth0/auth0-react";
 import { PoweroffOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, Menu as Settings } from "antd";
@@ -33,8 +33,8 @@ export const Header: React.FC<HeaderProps> = ({ showSidebar }) => {
     <HeaderWrapper>
       <Hamburger onClick={showSidebar} />
       <Menu>
-        <Link href={paths.public}>PUBLIC SCOPE</Link>
-        <Link href={paths.private}>PRIVATE SCOPE</Link>
+        <Link href={paths.publicScope.go()}>PUBLIC SCOPE</Link>
+        <Link href={paths.privateScope.go()}>PRIVATE SCOPE</Link>
       </Menu>
       <Dropdown overlay={setting} placement="bottomLeft" arrow>
         <Avatar size={"large"} src={user?.picture} />

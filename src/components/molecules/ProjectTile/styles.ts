@@ -1,18 +1,18 @@
 import styled from "@emotion/styled";
 
 export const Tile = styled.div<{ activeBorder?: boolean }>`
-  background: #cccccc;
+  background: ${(p) => p.theme.palette.gray300};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #020202;
+  color: ${(p) => p.theme.palette.text};
   min-height: 200px;
   max-height: 100%;
   border-radius: 6px;
   transition: 0.25s all;
-  border-color: #ee2549;
+  border: 3px solid ${(p) => p.theme.palette.gray300};
   &:hover {
-    background: #e5e5e5;
+    border-color: ${(p) => p.theme.palette.gray200};
   }
 `;
 
@@ -40,7 +40,7 @@ export const Title = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
-  color: #020202;
+  color: ${(p) => p.theme.palette.text};
   margin: 0px 0px 6px;
   text-align: start;
 `;
@@ -48,13 +48,13 @@ export const Title = styled.div`
 export const DetailsLabel = styled.span`
   font-weight: 600;
   font-size: 14px;
-  color: #020202;
+  color: ${(p) => p.theme.palette.text};
 `;
 
 export const DetailsValue = styled.span`
   font-weight: 400;
   font-size: 14px;
-  color: #7f7f7f;
+  color: ${(p) => p.theme.palette.gray500};
 `;
 
 export const Flex = styled.div`

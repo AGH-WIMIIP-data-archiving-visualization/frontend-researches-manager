@@ -1,6 +1,6 @@
 import { Project } from "@/generated";
 import { useAuth0 } from "@auth0/auth0-react";
-import { QueryObserverOptions, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import axiosClient from "../../http-common";
 import { GetAccessTokenSilently, CustomUseQueryOptions } from "../../types";
 

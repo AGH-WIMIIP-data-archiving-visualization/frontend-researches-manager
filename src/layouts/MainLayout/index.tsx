@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import { Header, Link } from "@/src/components";
 import { CloseButton, CustomSider, SiderContentWrapper } from "./styles";
 import { MainLayoutProps } from "./types";
-import { paths } from "@/paths";
+import { paths } from "@/src/paths";
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -20,8 +20,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <SiderContentWrapper>
           <CloseButton onClick={() => setShowSidebar(false)} />
 
-          <Link href={paths.public}>PUBLIC SCOPE</Link>
-          <Link href={paths.private}>PRIVATE SCOPE</Link>
+          <Link href={paths.publicScope.go()}>PUBLIC SCOPE</Link>
+          <Link href={paths.privateScope.go()}>PRIVATE SCOPE</Link>
         </SiderContentWrapper>
       </CustomSider>
 

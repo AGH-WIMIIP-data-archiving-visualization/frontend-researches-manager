@@ -8,7 +8,7 @@ export const Grid = styled.div`
   padding: 20px;
 `;
 export const Container = styled.div<{ open?: boolean }>`
-  background-color: #d8d8d8;
+  background-color: ${(p) => p.theme.palette.gray200};
   border-radius: 8px;
   margin-bottom: 20px;
   min-height: 600px;
@@ -17,6 +17,6 @@ export const Container = styled.div<{ open?: boolean }>`
 export const Header = styled.h2`
   font-size: 18px;
   font-weight: 700;
-  color: #020202;
+  color: ${(p) => p.theme.palette.text};
   padding: 20px;
 `;

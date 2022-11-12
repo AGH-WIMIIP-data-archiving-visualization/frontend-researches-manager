@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const NewTile = styled.div`
   display: flex;
-  color: #020202;
+  color: ${(p) => p.theme.palette.text};
   flex-flow: column nowrap;
   min-height: 200px;
   max-height: 100%;
@@ -11,18 +11,18 @@ export const NewTile = styled.div`
   align-items: center;
   justify-content: center;
   border-width: 1px;
-  border-color: #7f7f7f;
+  border-color: ${(p) => p.theme.palette.gray500};
   border-style: dashed;
   background: transparent;
   cursor: pointer;
   transition: 0.25s all;
   &:hover {
-    border-color: #007fff;
+    border-color: ${(p) => p.theme.palette.success};
   }
 `;
 
 export const Text = styled.span`
   font-weight: 600;
   font-size: 16px;
-  color: #020202;
+  color: ${(p) => p.theme.palette.text};
 `;
