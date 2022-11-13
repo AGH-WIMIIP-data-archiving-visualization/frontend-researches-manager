@@ -8,7 +8,7 @@ import { GetAccessTokenSilently, CustomUseQueryOptions } from "../../types";
 const getProjectById = async (
   getToken: GetAccessTokenSilently,
   projectId?: string
-): Promise<ProjectResponseDto[]> => {
+): Promise<ProjectResponseDto> => {
   const token = await getToken();
 
   return await axiosClient
@@ -19,7 +19,7 @@ const getProjectById = async (
 };
 
 export const useGetProjectById = (
-  options?: CustomUseQueryOptions<ProjectResponseDto[]>
+  options?: CustomUseQueryOptions<ProjectResponseDto>
 ) => {
   const { getAccessTokenSilently } = useAuth0();
   const {

@@ -1,4 +1,4 @@
-import { CreateProjectDto, Project } from "@/generated";
+import { CreateSingleResearchkDto, Project, SingleResearch } from "@/generated";
 import {
   CustomUseMutationOptions,
   GetAccessTokenSilently,
@@ -7,26 +7,28 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import axiosClient from "../../http-common";
 
-const postProject = async (
-  createProject: CreateProjectDto,
+const postResearch = async (
+  createResearch: CreateSingleResearchkDto,
   getToken: GetAccessTokenSilently
-): Promise<Project> => {
+): Promise<SingleResearch> => {
   const token = await getToken();
+  console.log(createResearch);
   return await axiosClient
-    .post("/project", createProject, {
+    .post("/single-research", createResearch, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => response.data);
 };
 
-export const usePostProject = (
-  options?: CustomUseMutationOptions<CreateProjectDto>
+export const usePostResearch = (
+  options?: CustomUseMutationOptions<CreateSingleResearchkDto>
 ) => {
   const { getAccessTokenSilently } = useAuth0();
 
   return useMutation(
-    ["addProject"],
-    (params: CreateProjectDto) => postProject(params, getAccessTokenSilently),
+    ["addResearch"],
+    (params: CreateSingleResearchkDto) =>
+      postResearch(params, getAccessTokenSilently),
     {
       ...options,
     }

@@ -1,5 +1,5 @@
 import { CreateProjectDto } from "@/generated";
-import { useGetProjects, usePostProjects } from "@/src/api";
+import { useGetProjects, usePostProject } from "@/src/api";
 import {
   Container,
   CreateProjectForm,
@@ -15,8 +15,8 @@ import NextLink from "next/link";
 import { paths } from "@/src/paths";
 
 const PrivateScope = () => {
-  const { data, refetch, isLoading } = useGetProjects();
-  const { mutateAsync } = usePostProjects();
+  const { data, refetch } = useGetProjects();
+  const { mutateAsync, isLoading } = usePostProject();
   const { user } = useAuth0();
   const [showModalAddProject, setShowModalAddProject] = useState(false);
 

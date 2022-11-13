@@ -9,9 +9,9 @@ export const Grid = styled.div`
 `;
 export const Container = styled.div<{ open?: boolean }>`
   background-color: ${(p) => p.theme.palette.gray200};
+  box-shadow: ${(p) => p.theme.shadows};
   border-radius: 8px;
   margin-bottom: 20px;
-  min-height: 600px;
 `;
 
 export const Header = styled.h2`

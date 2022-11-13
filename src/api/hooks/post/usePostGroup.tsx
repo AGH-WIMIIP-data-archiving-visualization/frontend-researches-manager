@@ -1,4 +1,4 @@
-import { CreateProjectDto, Project } from "@/generated";
+import { CreateGroupResearchkDto, GroupResearch } from "@/generated";
 import {
   CustomUseMutationOptions,
   GetAccessTokenSilently,
@@ -7,26 +7,27 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import axiosClient from "../../http-common";
 
-const postProject = async (
-  createProject: CreateProjectDto,
+const postGroup = async (
+  createGroup: CreateGroupResearchkDto,
   getToken: GetAccessTokenSilently
-): Promise<Project> => {
+): Promise<GroupResearch> => {
   const token = await getToken();
   return await axiosClient
-    .post("/project", createProject, {
+    .post("/group-research", createGroup, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => response.data);
 };
 
-export const usePostProject = (
-  options?: CustomUseMutationOptions<CreateProjectDto>
+export const usePostGroup = (
+  options?: CustomUseMutationOptions<CreateGroupResearchkDto>
 ) => {
   const { getAccessTokenSilently } = useAuth0();
 
   return useMutation(
-    ["addProject"],
-    (params: CreateProjectDto) => postProject(params, getAccessTokenSilently),
+    ["addGroup"],
+    (params: CreateGroupResearchkDto) =>
+      postGroup(params, getAccessTokenSilently),
     {
       ...options,
     }
