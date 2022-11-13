@@ -4,11 +4,11 @@ import Sider from "antd/lib/layout/Sider";
 
 export const CustomSider = styled(Sider)`
   position: fixed;
-  z-index: 20;
+  z-index: ${(p) => p.theme.zIndexes.sider};
   width: 100%;
   top: 0;
   height: 100%;
-  box-shadow: 0px 5px 30px #0000000f;
+  box-shadow: ${(p) => p.theme.shadows};
 `;
 
 export const CloseButton = styled(CloseCircleOutlined)`
@@ -17,7 +17,7 @@ export const CloseButton = styled(CloseCircleOutlined)`
   top: 15px;
   font-size: 25px;
   right: 15px;
-  color: #fff;
+  color: ${(p) => p.theme.palette.paper};
 `;
 
 export const SiderContentWrapper = styled.div`
