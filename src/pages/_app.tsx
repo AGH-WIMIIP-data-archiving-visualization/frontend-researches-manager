@@ -3,6 +3,10 @@ import "antd/dist/antd.css";
 import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AuthGuardProvider from "../providers/AuthGuardProvider";
+import { MainLayout } from "@/src/layouts";
+import { useRef } from "react";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "../styles/theme";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const providerConfig: Auth0ProviderOptions = {
@@ -12,21 +16,27 @@ const App = ({ Component, pageProps }: AppProps) => {
     redirectUri: typeof window !== "undefined" ? window.location.origin : "",
   };
 
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        retry: false,
-        staleTime: 5 * 60 * 1000,
+  const queryClient = useRef(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: true,
+          retry: false,
+          staleTime: 5 * 60 * 1000,
+        },
       },
-    },
-  });
+    })
+  );
 
   return (
     <Auth0Provider {...providerConfig}>
       <AuthGuardProvider>
-        <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+        <QueryClientProvider client={queryClient.current}>
+          <ThemeProvider theme={theme}>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ThemeProvider>
         </QueryClientProvider>
       </AuthGuardProvider>
     </Auth0Provider>
