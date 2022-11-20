@@ -5,17 +5,16 @@ import {
   LabjackConnectorResponse,
   useAddDataToResearch,
 } from "@/src/api";
-import { Container, Flex } from "@/src/components";
 import {
-  ClearOutlined,
-  LineChartOutlined,
-  PlayCircleOutlined,
-  SaveOutlined,
-  StopOutlined,
-} from "@ant-design/icons";
+  Container,
+  Empty,
+  Flex,
+  ResearchPageRightPane,
+} from "@/src/components";
+import { LineChartOutlined } from "@ant-design/icons";
 import { Line } from "@ant-design/plots";
 import styled from "@emotion/styled";
-import { Button, Typography } from "antd";
+import { Typography } from "antd";
 import { evaluate } from "mathjs";
 import { NextPage } from "next";
 import { useEffect, useMemo, useState } from "react";
@@ -32,29 +31,6 @@ const LeftPane = styled.div`
   min-height: 700px;
 `;
 
-const RightPane = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  flex: 20%;
-  margin: 0 20px;
-  padding: 20px 40px;
-  background-color: ${(p) => p.theme.palette.paper};
-  min-height: 700px;
-`;
-
-const NoDataIcon = styled(LineChartOutlined)`
-  color: ${(p) => p.theme.palette.gray500};
-  font-size: 370px;
-`;
-
-const NoDataTitle = styled.h1`
-  margin-bottom: -100px;
-  color: ${(p) => p.theme.palette.gray500};
-  font-weight: 800;
-  font-size: ${(p) => p.theme.fontSizes.xxl}; ;
-`;
-
 const ResearchInProject: NextPage = () => {
   const [run, setRun] = useState(false);
   const [currentData, setCurrentData] = useState<SingleRead[]>([]);
@@ -62,10 +38,10 @@ const ResearchInProject: NextPage = () => {
   const {
     data: backendResearchData,
     refetch,
-    isLoading: isrResearchByIdLoading,
+    isLoading: isResearchByIdLoading,
   } = useGetResearchById();
 
-  const { refetch: runLabjack, isFetching: isLabjakcFetching } =
+  const { refetch: runLabjack, isFetching: isLabjackFetching } =
     useGetDataFromLabjack(
       {
         analogInputNo: 0,
@@ -81,14 +57,14 @@ const ResearchInProject: NextPage = () => {
       }
     );
 
-  const { mutateAsync, isLoading } = useAddDataToResearch();
+  const { mutateAsync, isLoading: isSaving } = useAddDataToResearch();
 
   useEffect(() => {
     return setCurrentData(backendResearchData?.data ?? []);
   }, [backendResearchData]);
 
   const isData = backendResearchData?.data || currentData.length != 0;
-  const isReadOnlyMode = !backendResearchData?.data && !isrResearchByIdLoading;
+  const isCreateMode = !backendResearchData?.data && !isResearchByIdLoading;
 
   const f = "572257.26 * x - 944477.12";
   const preparedData: SingleRead[] = useMemo(
@@ -110,12 +86,7 @@ const ResearchInProject: NextPage = () => {
           <Flex col fullH justify="space-around" gap={"30px"}>
             <Title level={3}>Research Data</Title>
             <Flex justify="center">
-              {isReadOnlyMode && currentData.length === 0 && (
-                <Flex col align="center">
-                  <NoDataTitle>No data </NoDataTitle>
-                  <NoDataIcon />
-                </Flex>
-              )}
+              {isCreateMode && currentData.length === 0 && <Empty />}
               {isData && (
                 <Line
                   style={{
@@ -166,60 +137,26 @@ const ResearchInProject: NextPage = () => {
             </Flex>
           </Flex>
         </LeftPane>
-        {isReadOnlyMode && (
-          <RightPane>
-            <Flex col gap="20px" justify="center">
-              <Title level={4}> Panel</Title>
-              <Button
-                icon={<PlayCircleOutlined />}
-                onClick={() => {
-                  runLabjack();
-                  setRun(true);
-                }}
-                type="primary"
-                size="large"
-                loading={isLabjakcFetching && run}
-              >
-                Start Research
-              </Button>
-
-              <Button
-                icon={<StopOutlined />}
-                disabled={!isLabjakcFetching}
-                loading={isLabjakcFetching && !run}
-                onClick={() => setRun(false)}
-                type="primary"
-                size="large"
-              >
-                Stop
-              </Button>
-              <Button
-                disabled={!currentData.length}
-                icon={<ClearOutlined />}
-                onClick={() => setCurrentData([])}
-                type="primary"
-                size="large"
-              >
-                Clear
-              </Button>
-              <Button
-                disabled={!currentData.length || isLabjakcFetching}
-                loading={isLoading}
-                icon={<SaveOutlined />}
-                onClick={async () => {
-                  await mutateAsync({
-                    id: backendResearchData!.id,
-                    data: currentData,
-                  });
-                  refetch();
-                }}
-                type="primary"
-                size="large"
-              >
-                Save
-              </Button>
-            </Flex>
-          </RightPane>
+        {isCreateMode && (
+          <ResearchPageRightPane
+            onStart={() => {
+              runLabjack();
+              setRun(true);
+            }}
+            onStop={() => setRun(false)}
+            onClear={() => setCurrentData([])}
+            onSave={async () => {
+              await mutateAsync({
+                id: backendResearchData!.id,
+                data: currentData,
+              });
+              refetch();
+            }}
+            hasData={currentData.length > 0}
+            isLabjackFetching={isLabjackFetching}
+            isRunning={run}
+            onSaveLoading={isSaving}
+          />
         )}
       </Flex>
     </Container>
