@@ -1,6 +1,11 @@
 import { UrlObject } from "url";
 
-type Pathname = "notFound" | "privateScope" | "publicScope" | "project";
+type Pathname =
+  | "notFound"
+  | "privateScope"
+  | "publicScope"
+  | "project"
+  | "researchInProject";
 
 type Paths = {
   [key in Pathname]: {
@@ -41,6 +46,22 @@ export const paths: Paths = {
       pathname: paths.project.pathname,
       query: {
         projectId,
+      },
+    }),
+  },
+  researchInProject: {
+    pathname: "/private/project/[projectId]/research/[researchId]",
+    go: ({
+      projectId,
+      researchId,
+    }: {
+      projectId?: string;
+      researchId?: string;
+    }) => ({
+      pathname: paths.researchInProject.pathname,
+      query: {
+        projectId,
+        researchId,
       },
     }),
   },

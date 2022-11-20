@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@ant-design/plots": "^1.2.2",
     "@auth0/auth0-react": "^1.12.0",
     "@emotion/css": "^11.9.0",
     "@emotion/react": "^11.9.3",
@@ -19,8 +20,10 @@
     "axios": "^0.27.2",
     "dotenv-cli": "^6.0.0",
     "gray-matter": "^4.0.3",
+    "mathjs": "^11.4.0",
     "next": "^12.2.2",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.0.1",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
     "remark": "^14.0.2",
