@@ -3,4 +3,4 @@ export * from "./ProjectTile";
 export * from "./GroupTile";
 export * from "./ResearchTile";
 export * from "./forms";
-export * from "./ResearchPageRightPane";
+export * from "./LineChart";
