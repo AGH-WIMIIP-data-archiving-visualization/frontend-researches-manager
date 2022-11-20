@@ -1,6 +1,6 @@
 import { UseMutationOptions, UseQueryOptions } from "react-query";
 
-export type CustomUseQueryOptions<T> = Omit<
+type CustomUseQueryOptions<T> = Omit<
   UseQueryOptions<T, any, T, any[]>,
   "queryKey" | "queryFn" | "initialData"
 > & {

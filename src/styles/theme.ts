@@ -62,6 +62,7 @@ export const fontSizes = {
   xs: "12px",
   sm: "14px",
   md: "16px",
+  xxl: "32px",
 };
 
 export const fontFamily = {};
