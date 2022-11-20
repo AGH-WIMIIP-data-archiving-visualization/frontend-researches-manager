@@ -13,8 +13,9 @@ import React, { useState } from "react";
 const { Title } = Typography;
 import NextLink from "next/link";
 import { paths } from "@/src/paths";
+import { NextPage } from "next";
 
-const PrivateScope = () => {
+const PrivateScope : NextPage= () => {
   const { data, refetch } = useGetProjects();
   const { mutateAsync, isLoading } = usePostProject();
   const { user } = useAuth0();

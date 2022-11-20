@@ -19,11 +19,12 @@ import {
 import { NewProjectTile } from "@/src/components/atoms/NewTile";
 import { paths } from "@/src/paths";
 import { Form, Modal } from "antd";
+import { NextPage } from "next";
 import NextLink from "next/link";
 
 import React, { useState } from "react";
 
-const Project = () => {
+const Project: NextPage = () => {
   const [createResearchForm] = Form.useForm<CreateSingleResearchkDto>();
   const [createGroupForm] = Form.useForm<CreateGroupResearchkDto>();
 
@@ -143,7 +144,10 @@ const Project = () => {
               <NextLink
                 key={e.id}
                 passHref
-                href={paths.project.go({ projectId: e.id })}
+                href={paths.researchInProject.go({
+                  projectId: projectData?.id ?? "",
+                  researchId: e.id,
+                })}
               >
                 <a>
                   <ResearchTile key={e.id} {...e} />
