@@ -95,7 +95,6 @@ const Project: NextPage = () => {
           onFinish={async (formData: CreateSingleResearchkDto) => {
             const { singleResearchName } = formData;
             const research = await createResearch({
-              deviceName: "Labjack-load-cell-1",
               isPublic: projectData?.isPublic ?? false,
               singleResearchName: singleResearchName,
             });
