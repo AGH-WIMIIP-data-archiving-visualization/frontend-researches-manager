@@ -9,6 +9,10 @@ export const Hamburger = styled(MenuOutlined)`
     display: none;
   }
 `;
+
+export const NavElement = styled.span<{ isActive?: boolean }>`
+  font-weight: ${(p) => (p.isActive ? 900 : 200)};
+`;
 export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;

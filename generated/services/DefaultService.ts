@@ -29,13 +29,19 @@ export class DefaultService {
     }
 
     /**
+     * @param publicOnly
      * @returns any
      * @throws ApiError
      */
-    public static singleResearchControllerGetAllSingleResearches(): CancelablePromise<any> {
+    public static singleResearchControllerGetAllSingleResearches(
+        publicOnly: boolean,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/single-research',
+            query: {
+                'publicOnly': publicOnly,
+            },
         });
     }
 
@@ -127,13 +133,19 @@ export class DefaultService {
     }
 
     /**
+     * @param publicOnly
      * @returns GroupResearchResponseDto
      * @throws ApiError
      */
-    public static groupResearchControllerGetAllGroupResearches(): CancelablePromise<Array<GroupResearchResponseDto>> {
+    public static groupResearchControllerGetAllGroupResearches(
+        publicOnly: boolean,
+    ): CancelablePromise<Array<GroupResearchResponseDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/group-research',
+            query: {
+                'publicOnly': publicOnly,
+            },
         });
     }
 
@@ -208,13 +220,19 @@ export class DefaultService {
     }
 
     /**
+     * @param publicOnly
      * @returns Project
      * @throws ApiError
      */
-    public static projectControllerGetAllProjects(): CancelablePromise<Array<Project>> {
+    public static projectControllerGetAllProjects(
+        publicOnly: boolean,
+    ): CancelablePromise<Array<Project>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/project',
+            query: {
+                'publicOnly': publicOnly,
+            },
         });
     }
 

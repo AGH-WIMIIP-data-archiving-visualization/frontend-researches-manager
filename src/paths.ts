@@ -7,7 +7,11 @@ type Pathname =
   | "project"
   | "researchInProject"
   | "groupInProject"
-  | "researchInGroup";
+  | "researchInGroup"
+  | "projectPublic"
+  | "researchInPublicProject"
+  | "groupInPublicProject"
+  | "researchInPublicGroup";
 
 type Paths = {
   [key in Pathname]: {
@@ -36,7 +40,7 @@ export const paths: Paths = {
     }),
   },
   publicScope: {
-    pathname: "/",
+    pathname: "/public",
     go: () => ({
       pathname: paths.publicScope.pathname,
       query: {},
@@ -51,6 +55,32 @@ export const paths: Paths = {
       },
     }),
   },
+  projectPublic: {
+    pathname: "/public/project/[projectId]",
+    go: ({ projectId }: { projectId?: string }) => ({
+      pathname: paths.projectPublic.pathname,
+      query: {
+        projectId,
+      },
+    }),
+  },
+  researchInPublicProject: {
+    pathname: "/public/project/[projectId]/research/[researchId]",
+    go: ({
+      projectId,
+      researchId,
+    }: {
+      projectId?: string;
+      researchId?: string;
+    }) => ({
+      pathname: paths.researchInPublicProject.pathname,
+      query: {
+        projectId,
+        researchId,
+      },
+    }),
+  },
+
   researchInProject: {
     pathname: "/private/project/[projectId]/research/[researchId]",
     go: ({
@@ -79,6 +109,17 @@ export const paths: Paths = {
     }),
   },
 
+  groupInPublicProject: {
+    pathname: "/public/project/[projectId]/group/[groupId]",
+    go: ({ projectId, groupId }: { projectId?: string; groupId?: string }) => ({
+      pathname: paths.groupInPublicProject.pathname,
+      query: {
+        projectId,
+        groupId,
+      },
+    }),
+  },
+
   researchInGroup: {
     pathname:
       "/private/project/[projectId]/group/[groupId]/research/[researchId]",
@@ -92,6 +133,27 @@ export const paths: Paths = {
       researchId?: string;
     }) => ({
       pathname: paths.researchInGroup.pathname,
+      query: {
+        projectId,
+        groupId,
+        researchId,
+      },
+    }),
+  },
+
+  researchInPublicGroup: {
+    pathname:
+      "/public/project/[projectId]/group/[groupId]/research/[researchId]",
+    go: ({
+      projectId,
+      groupId,
+      researchId,
+    }: {
+      projectId?: string;
+      groupId?: string;
+      researchId?: string;
+    }) => ({
+      pathname: paths.researchInPublicGroup.pathname,
       query: {
         projectId,
         groupId,
