@@ -122,7 +122,10 @@ const Project: NextPage = () => {
               <NextLink
                 key={e.id}
                 passHref
-                href={paths.project.go({ projectId: e.id })}
+                href={paths.groupInProject.go({
+                  projectId: projectData?.id ?? "",
+                  groupId: e.id,
+                })}
               >
                 <a>
                   <GroupTile key={e.id} {...e} />

@@ -7,6 +7,7 @@ import type { CreateGroupResearchkDto } from '../models/CreateGroupResearchkDto'
 import type { CreateProjectDto } from '../models/CreateProjectDto';
 import type { CreateSingleResearchkDto } from '../models/CreateSingleResearchkDto';
 import type { Device } from '../models/Device';
+import type { GroupResearchResponseDto } from '../models/GroupResearchResponseDto';
 import type { Project } from '../models/Project';
 import type { ProjectResponseDto } from '../models/ProjectResponseDto';
 
@@ -126,10 +127,10 @@ export class DefaultService {
     }
 
     /**
-     * @returns any
+     * @returns GroupResearchResponseDto
      * @throws ApiError
      */
-    public static groupResearchControllerGetAllGroupResearches(): CancelablePromise<any> {
+    public static groupResearchControllerGetAllGroupResearches(): CancelablePromise<Array<GroupResearchResponseDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/group-research',
@@ -138,12 +139,12 @@ export class DefaultService {
 
     /**
      * @param id
-     * @returns any
+     * @returns GroupResearchResponseDto
      * @throws ApiError
      */
     public static groupResearchControllerGetGroupResearchById(
         id: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<GroupResearchResponseDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/group-research/{id}',

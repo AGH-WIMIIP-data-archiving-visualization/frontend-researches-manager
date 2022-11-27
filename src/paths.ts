@@ -5,7 +5,9 @@ type Pathname =
   | "privateScope"
   | "publicScope"
   | "project"
-  | "researchInProject";
+  | "researchInProject"
+  | "groupInProject"
+  | "researchInGroup";
 
 type Paths = {
   [key in Pathname]: {
@@ -61,6 +63,38 @@ export const paths: Paths = {
       pathname: paths.researchInProject.pathname,
       query: {
         projectId,
+        researchId,
+      },
+    }),
+  },
+
+  groupInProject: {
+    pathname: "/private/project/[projectId]/group/[groupId]",
+    go: ({ projectId, groupId }: { projectId?: string; groupId?: string }) => ({
+      pathname: paths.groupInProject.pathname,
+      query: {
+        projectId,
+        groupId,
+      },
+    }),
+  },
+
+  researchInGroup: {
+    pathname:
+      "/private/project/[projectId]/group/[groupId]/research/[researchId]",
+    go: ({
+      projectId,
+      groupId,
+      researchId,
+    }: {
+      projectId?: string;
+      groupId?: string;
+      researchId?: string;
+    }) => ({
+      pathname: paths.researchInGroup.pathname,
+      query: {
+        projectId,
+        groupId,
         researchId,
       },
     }),
