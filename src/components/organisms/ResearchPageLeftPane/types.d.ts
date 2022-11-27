@@ -5,4 +5,5 @@ export interface ResearchPageLeftPaneProps {
   createdAt?: string;
   isCreateMode: boolean;
   preparedData: SingleRead[];
+  Xlabel?: string;
 }

@@ -8,6 +8,7 @@ export const ResearchPageLeftPane: React.FC<ResearchPageLeftPaneProps> = ({
   name,
   isCreateMode,
   preparedData,
+  Xlabel,
 }) => {
   return (
     <LeftPane>
@@ -19,7 +20,9 @@ export const ResearchPageLeftPane: React.FC<ResearchPageLeftPaneProps> = ({
         <Title level={3}>Data plot</Title>
         <Flex justify="center">
           {preparedData.length === 0 && isCreateMode && <Empty />}
-          {preparedData.length > 0 && <LineChart data={preparedData} />}
+          {preparedData.length > 0 && (
+            <LineChart xLabel={Xlabel} data={preparedData} />
+          )}
         </Flex>
       </Flex>
     </LeftPane>

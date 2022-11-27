@@ -2,9 +2,10 @@ import { Line, LineConfig } from "@ant-design/plots";
 import { LineChartStyles } from "./styles";
 import { LineChartProps } from "./types";
 
-export const LineChart: React.FC<LineChartProps> = ({ data }) => {
+export const LineChart: React.FC<LineChartProps> = ({ data, xLabel }) => {
   const config = {
     data: data,
+
     padding: "auto",
     xField: "iteration",
     yField: "voltageValue",
@@ -33,9 +34,9 @@ export const LineChart: React.FC<LineChartProps> = ({ data }) => {
           cursor: "pointer",
         },
       },
-      alias: "NEWTONS [N]",
+      alias: xLabel ?? ["NO iNFO"],
       title: {
-        text: "NEWTONS [N]",
+        text: xLabel ?? ["NO iNFO"],
         style: {
           fontSize: 24,
         },

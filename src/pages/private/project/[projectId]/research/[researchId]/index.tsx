@@ -1,9 +1,10 @@
-import { SingleRead } from "@/generated";
+import { Device, SingleRead } from "@/generated";
 import {
   useGetResearchById,
   useGetDataFromLabjack,
   LabjackConnectorResponse,
   useAddDataToResearch,
+  useGetDevices,
 } from "@/src/api";
 import {
   Container,
@@ -18,6 +19,7 @@ import { useEffect, useMemo, useState } from "react";
 const ResearchInProject: NextPage = () => {
   const [run, setRun] = useState(false);
   const [currentData, setCurrentData] = useState<SingleRead[]>([]);
+  const [selectedDevice, setSelectedDevice] = useState<Device | null>();
 
   const {
     data: backendResearchData,
@@ -28,7 +30,7 @@ const ResearchInProject: NextPage = () => {
   const { refetch: runLabjack, isFetching: isLabjackFetching } =
     useGetDataFromLabjack(
       {
-        analogInputNo: 0,
+        analogInputNo: selectedDevice?.deviceInput ?? 0,
         duration: 1,
       },
       {
@@ -49,12 +51,18 @@ const ResearchInProject: NextPage = () => {
 
   const isCreateMode = !backendResearchData?.data && !isResearchByIdLoading;
 
-  const f = "572257.26 * x - 944477.12";
   const preparedData: SingleRead[] = useMemo(
     () =>
       currentData.map((e, index) => ({
         iteration: index,
-        voltageValue: evaluate(f, { x: e.voltageValue }),
+        voltageValue: evaluate(
+          selectedDevice?.scalingFunction ??
+            backendResearchData?.scalingFunction ??
+            "x*1",
+          {
+            x: e.voltageValue,
+          }
+        ),
       })),
     [currentData]
   );
@@ -71,9 +79,13 @@ const ResearchInProject: NextPage = () => {
     await mutateAsync({
       id: backendResearchData!.id,
       data: currentData,
+      deviceName: selectedDevice?.deviceName ?? "",
+      scalingFunction: selectedDevice?.scalingFunction ?? "",
+      unit: selectedDevice?.unit ?? "",
     });
     refetch();
   };
+  console.log(selectedDevice);
   return (
     <Container>
       <Flex>
@@ -82,9 +94,12 @@ const ResearchInProject: NextPage = () => {
           preparedData={preparedData}
           createdAt={backendResearchData?.createdAt}
           name={backendResearchData?.singleResearchName}
+          Xlabel={backendResearchData?.unit ?? selectedDevice?.unit}
         />
         {isCreateMode && (
           <ResearchPageRightPane
+            device={selectedDevice}
+            selectDevice={setSelectedDevice}
             onStart={handleOnStart}
             onStop={handleOnStop}
             onClear={handleOnClear}
