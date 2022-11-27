@@ -1,4 +1,5 @@
 import { Project } from "@/generated";
+import { DeleteOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import {
   Contents,
@@ -10,10 +11,14 @@ import {
   Flex,
   DetailsLabel,
   DetailsValue,
+  DeleteButton,
 } from "./styles";
 const { Text } = Typography;
-export const ProjectTile: React.FC<Project> = (props) => {
-  const { createdAt, description, isPublic, projectName, updatedAt } = props;
+export const ProjectTile: React.FC<
+  Project & { onDelete?: (e: React.MouseEvent<HTMLElement>) => void }
+> = (props) => {
+  const { createdAt, description, isPublic, projectName, updatedAt, onDelete } =
+    props;
   return (
     <Tile activeBorder={true}>
       <Contents>
@@ -34,6 +39,14 @@ export const ProjectTile: React.FC<Project> = (props) => {
       </Contents>
       <TileFooter>
         <Description>{description}</Description>
+        {onDelete && (
+          <DeleteButton
+            onClick={(e) => onDelete(e)}
+            type="primary"
+            icon={<DeleteOutlined />}
+            size="large"
+          />
+        )}
       </TileFooter>
     </Tile>
   );

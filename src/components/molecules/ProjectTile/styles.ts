@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "antd";
 
 export const Tile = styled.div<{ activeBorder?: boolean }>`
   background: ${(p) => p.theme.palette.gray300};
@@ -29,6 +30,7 @@ export const TileFooter = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 20px 20px;
+  align-items: flex-end;
 `;
 
 export const Description = styled.div`
@@ -61,4 +63,14 @@ export const Flex = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+
+export const DeleteButton = styled(Button)`
+  background: ${(p) => p.theme.palette.red500};
+
+  border: 1px solid ${(p) => p.theme.palette.red500};
+  &:hover {
+    background: ${(p) => p.theme.palette.red400};
+    border: 1px solid ${(p) => p.theme.palette.red100};
+  }
 `;

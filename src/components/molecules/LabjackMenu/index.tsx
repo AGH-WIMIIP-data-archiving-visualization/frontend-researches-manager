@@ -76,7 +76,6 @@ export const LabjackMenu: React.FC = () => {
           value={deleteDeviceName}
           onChange={(e) => setDeleteDeviceName(e.target.value)}
         />
-        <></>
       </Modal>
       <Button
         onClick={() => setIsMenuOpem((prev) => !prev)}
