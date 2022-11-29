@@ -8,9 +8,8 @@ export const Grid = styled.div`
   padding: 20px;
 `;
 export const Container = styled.div<{ open?: boolean }>`
-  background-color: ${(p) => p.theme.palette.gray200};
+  background-color: ${(p) => p.theme.palette.paper};
   box-shadow: ${(p) => p.theme.shadows};
-  border-radius: 8px;
   margin-bottom: 20px;
 `;
 

@@ -1,9 +1,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { ConductLabjackResearchDto } from '../models/ConductLabjackResearchDto';
+import type { CreateDeviceDto } from '../models/CreateDeviceDto';
 import type { CreateGroupResearchkDto } from '../models/CreateGroupResearchkDto';
 import type { CreateProjectDto } from '../models/CreateProjectDto';
 import type { CreateSingleResearchkDto } from '../models/CreateSingleResearchkDto';
+import type { Device } from '../models/Device';
+import type { GroupResearchResponseDto } from '../models/GroupResearchResponseDto';
 import type { Project } from '../models/Project';
 import type { ProjectResponseDto } from '../models/ProjectResponseDto';
 
@@ -20,18 +24,24 @@ export class DefaultService {
     public static singleResearchControllerGetLabjackData(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/single-research/grpcTest',
+            url: '/single-research/labjack-1',
         });
     }
 
     /**
+     * @param publicOnly
      * @returns any
      * @throws ApiError
      */
-    public static singleResearchControllerGetAllSingleResearches(): CancelablePromise<any> {
+    public static singleResearchControllerGetAllSingleResearches(
+        publicOnly: boolean,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/single-research',
+            query: {
+                'publicOnly': publicOnly,
+            },
         });
     }
 
@@ -70,15 +80,36 @@ export class DefaultService {
 
     /**
      * @param id
+     * @param requestBody
      * @returns any
      * @throws ApiError
      */
     public static singleResearchControllerConductLabjackResearch(
         id: string,
+        requestBody: ConductLabjackResearchDto,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/single-research/{id}/research',
+            url: '/single-research/{id}',
+            path: {
+                'id': id,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * @param id
+     * @returns any
+     * @throws ApiError
+     */
+    public static singleResearchControllerDeleteResearchById(
+        id: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/single-research/{id}',
             path: {
                 'id': id,
             },
@@ -102,13 +133,36 @@ export class DefaultService {
     }
 
     /**
-     * @returns any
+     * @param publicOnly
+     * @returns GroupResearchResponseDto
      * @throws ApiError
      */
-    public static groupResearchControllerGetAllGroupResearches(): CancelablePromise<any> {
+    public static groupResearchControllerGetAllGroupResearches(
+        publicOnly: boolean,
+    ): CancelablePromise<Array<GroupResearchResponseDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/group-research',
+            query: {
+                'publicOnly': publicOnly,
+            },
+        });
+    }
+
+    /**
+     * @param id
+     * @returns GroupResearchResponseDto
+     * @throws ApiError
+     */
+    public static groupResearchControllerGetGroupResearchById(
+        id: string,
+    ): CancelablePromise<GroupResearchResponseDto> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/group-research/{id}',
+            path: {
+                'id': id,
+            },
         });
     }
 
@@ -117,11 +171,11 @@ export class DefaultService {
      * @returns any
      * @throws ApiError
      */
-    public static groupResearchControllerGetGroupResearchById(
+    public static groupResearchControllerDeleteGroupById(
         id: string,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
-            method: 'GET',
+            method: 'DELETE',
             url: '/group-research/{id}',
             path: {
                 'id': id,
@@ -166,13 +220,19 @@ export class DefaultService {
     }
 
     /**
+     * @param publicOnly
      * @returns Project
      * @throws ApiError
      */
-    public static projectControllerGetAllProjects(): CancelablePromise<Array<Project>> {
+    public static projectControllerGetAllProjects(
+        publicOnly: boolean,
+    ): CancelablePromise<Array<Project>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/project',
+            query: {
+                'publicOnly': publicOnly,
+            },
         });
     }
 
@@ -186,6 +246,23 @@ export class DefaultService {
     ): CancelablePromise<ProjectResponseDto> {
         return __request(OpenAPI, {
             method: 'GET',
+            url: '/project/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * @param id
+     * @returns any
+     * @throws ApiError
+     */
+    public static projectControllerDeleteDeviceById(
+        id: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
             url: '/project/{id}',
             path: {
                 'id': id,
@@ -229,6 +306,67 @@ export class DefaultService {
             path: {
                 'projectID': projectId,
                 'groupID': groupId,
+            },
+        });
+    }
+
+    /**
+     * @returns Device
+     * @throws ApiError
+     */
+    public static deviceControllerGetAllDevices(): CancelablePromise<Array<Device>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/device',
+        });
+    }
+
+    /**
+     * @param requestBody
+     * @returns any
+     * @throws ApiError
+     */
+    public static deviceControllerCreateDevice(
+        requestBody: CreateDeviceDto,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/device',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * @param id
+     * @returns any
+     * @throws ApiError
+     */
+    public static deviceControllerGetDeviceById(
+        id: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/device/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * @param id
+     * @returns any
+     * @throws ApiError
+     */
+    public static deviceControllerDeleteDeviceById(
+        id: string,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/device/{id}',
+            path: {
+                'id': id,
             },
         });
     }

@@ -6,3 +6,4 @@ export * from "./Box";
 export * from "./Flex";
 export * from "./Paper";
 export * from "./Empty";
+export * from "./DeleteButton";
