@@ -32,6 +32,7 @@ export const TileFooter = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 20px 20px;
+  align-items: flex-end;
 `;
 
 export const Title = styled.div`
