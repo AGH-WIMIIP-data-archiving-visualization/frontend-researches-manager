@@ -10,7 +10,7 @@ export const GroupHeader: React.FC<GroupHeaderProps> = ({ data }) => {
       <Flex>
         <SideWrapper>
           <Title code level={2}>
-            Group-{data?.groupResearchName}
+            GROUP/{data?.groupResearchName}
           </Title>
           <Flex align="baseline" gap="10px">
             <Title level={5}>Created At: </Title>

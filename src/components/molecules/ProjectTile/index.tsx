@@ -1,6 +1,7 @@
 import { Project } from "@/generated";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
+import { DeleteButton } from "@/src/components";
 import {
   Contents,
   Description,
@@ -11,7 +12,6 @@ import {
   Flex,
   DetailsLabel,
   DetailsValue,
-  DeleteButton,
 } from "./styles";
 const { Text } = Typography;
 export const ProjectTile: React.FC<

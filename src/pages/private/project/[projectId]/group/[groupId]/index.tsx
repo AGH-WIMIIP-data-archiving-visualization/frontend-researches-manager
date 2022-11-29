@@ -83,7 +83,11 @@ const GroupInProject: NextPage = () => {
                 })}
               >
                 <a key={e.id}>
-                  <ResearchTile key={e.id} {...e} />
+                  <ResearchTile
+                    onDelete={() => console.log("delete")}
+                    key={e.id}
+                    {...e}
+                  />
                 </a>
               </NextLink>
             ))}

@@ -32,8 +32,7 @@ const ResearchInPublicProject: NextPage = () => {
         <ResearchPageLeftPane
           isCreateMode={false}
           preparedData={preparedData}
-          createdAt={backendResearchData?.createdAt}
-          name={backendResearchData?.singleResearchName}
+          data={backendResearchData}
           Xlabel={backendResearchData?.unit}
         />
       </Flex>

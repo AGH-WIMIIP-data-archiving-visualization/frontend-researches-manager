@@ -90,8 +90,7 @@ const ResearchInProject: NextPage = () => {
         <ResearchPageLeftPane
           isCreateMode={isCreateMode}
           preparedData={preparedData}
-          createdAt={backendResearchData?.createdAt}
-          name={backendResearchData?.singleResearchName}
+          data={backendResearchData}
           Xlabel={backendResearchData?.unit ?? selectedDevice?.unit}
         />
         {isCreateMode && (

@@ -42,3 +42,12 @@ export const Menu = styled.div`
     display: none;
   }
 `;
+
+export const Logo = styled.div`
+  font-weight: 800;
+  color: ${(p) => p.theme.palette.blue400};
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 2px solid ${(p) => p.theme.palette.blue400};
+`;

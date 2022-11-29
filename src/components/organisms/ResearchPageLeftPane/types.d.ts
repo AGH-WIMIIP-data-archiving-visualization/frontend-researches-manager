@@ -1,8 +1,7 @@
-import { SingleRead } from "@/generated";
+import { SingleRead, SingleResearch } from "@/generated";
 
 export interface ResearchPageLeftPaneProps {
-  name?: string;
-  createdAt?: string;
+  data?: SingleResearch;
   isCreateMode: boolean;
   preparedData: SingleRead[];
   Xlabel?: string;

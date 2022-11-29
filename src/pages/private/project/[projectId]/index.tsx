@@ -128,7 +128,11 @@ const Project: NextPage = () => {
                 })}
               >
                 <a>
-                  <GroupTile key={e.id} {...e} />
+                  <GroupTile
+                    onDelete={() => console.log("delete")}
+                    key={e.id}
+                    {...e}
+                  />
                 </a>
               </NextLink>
             ))}
@@ -152,7 +156,11 @@ const Project: NextPage = () => {
                 })}
               >
                 <a>
-                  <ResearchTile key={e.id} {...e} />
+                  <ResearchTile
+                    onDelete={() => console.log("delete")}
+                    key={e.id}
+                    {...e}
+                  />
                 </a>
               </NextLink>
             ))}

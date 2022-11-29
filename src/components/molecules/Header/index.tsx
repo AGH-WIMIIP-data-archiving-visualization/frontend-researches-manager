@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderWrapper, Hamburger, Menu, NavElement } from "./styles";
+import { HeaderWrapper, Hamburger, Menu, NavElement, Logo } from "./styles";
 import { HeaderProps } from "./types";
 import { Flex, LabjackMenu, Link } from "@/src/components";
 import { paths } from "@/src/paths";
@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { PoweroffOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, Menu as Settings } from "antd";
 import { useRouter } from "next/router";
-
+import Image from "next/image";
 export const Header: React.FC<HeaderProps> = ({ showSidebar }) => {
   const { user, logout } = useAuth0();
   const router = useRouter();
@@ -34,6 +34,7 @@ export const Header: React.FC<HeaderProps> = ({ showSidebar }) => {
     <HeaderWrapper>
       <Hamburger onClick={showSidebar} />
       <Menu>
+        <Logo>WIMiIP LAB</Logo>
         <Link href={paths.publicScope.go()}>
           <NavElement isActive={router.pathname.includes("public")}>
             PUBLIC SCOPE
