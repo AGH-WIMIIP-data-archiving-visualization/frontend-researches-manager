@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
 
 export const Tile = styled.div<{ activeBorder?: boolean }>`
-  background: ${(p) => p.theme.palette.gray300};
+  background: ${(p) => p.theme.palette.paper};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: ${(p) => p.theme.palette.text};
   min-height: 200px;
   max-height: 100%;
-  border-radius: 6px;
   transition: 0.25s all;
-  border: 3px solid ${(p) => p.theme.palette.gray300};
+  border: ${(p) =>
+    p.activeBorder
+      ? `2px dashed ${p.theme.palette.blue500}`
+      : `1px solid ${p.theme.palette.text}`};
+
   &:hover {
     border-color: ${(p) => p.theme.palette.gray200};
   }

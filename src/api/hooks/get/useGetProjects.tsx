@@ -4,22 +4,36 @@ import { useQuery } from "react-query";
 import axiosClient from "../../http-common";
 import { GetAccessTokenSilently, CustomUseQueryOptions } from "../../types";
 
+interface getProjectFilter {
+  publicOnly?: boolean;
+}
+
 const getProjects = async (
-  getToken: GetAccessTokenSilently
+  getToken: GetAccessTokenSilently,
+  isPublic?: boolean
 ): Promise<Project[]> => {
   const token = await getToken();
-  console.log(token);
   return await axiosClient
     .get("/project", {
+      params: {
+        publicOnly: isPublic,
+      },
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => response.data);
 };
 
-export const useGetProjects = (options?: CustomUseQueryOptions<Project[]>) => {
+export const useGetProjects = (
+  isPublic?: boolean,
+  options?: CustomUseQueryOptions<Project[]>
+) => {
   const { getAccessTokenSilently } = useAuth0();
 
-  return useQuery(["getProjects"], () => getProjects(getAccessTokenSilently), {
-    ...options,
-  });
+  return useQuery(
+    [isPublic ? "getProjects" : "getProjectsPublic"],
+    () => getProjects(getAccessTokenSilently, isPublic),
+    {
+      ...options,
+    }
+  );
 };

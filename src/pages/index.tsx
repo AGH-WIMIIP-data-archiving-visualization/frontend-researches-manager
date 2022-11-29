@@ -1,16 +1,14 @@
-import { Container } from "@/src/components";
-import { Typography } from "antd";
-import React from "react";
-const { Title } = Typography;
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-const PublicScope = () => {
-  return (
-    <Container>
-      <Title type="secondary" level={3}>
-        Projects
-      </Title>
-    </Container>
-  );
+const Main = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/public", undefined, { shallow: true });
+  }, []);
+
+  return <></>;
 };
 
-export default PublicScope;
+export default Main;

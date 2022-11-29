@@ -8,4 +8,5 @@ export const RightPane = styled.div`
   padding: 20px 40px;
   background-color: ${(p) => p.theme.palette.paper};
   min-height: 700px;
+  gap: 20px;
 `;

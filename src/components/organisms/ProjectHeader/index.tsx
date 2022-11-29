@@ -1,5 +1,5 @@
 import { Flex, Paper } from "@/src/components";
-import { PrivateIcon, PublicIcon, SideWrapper } from "./styles";
+import { PrivateIcon, SideWrapper } from "./styles";
 import { ProjectHeaderProps } from "./types";
 import { Typography } from "antd";
 const { Title, Text } = Typography;
@@ -10,7 +10,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ data }) => {
       <Flex>
         <SideWrapper>
           <Title code level={2}>
-            {data?.projectName}
+            PROJECT/{data?.projectName}
           </Title>
           <Flex align="baseline" gap="10px">
             <Title level={5}>Created At: </Title>
@@ -26,7 +26,6 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ data }) => {
             <Title level={4}>Access: </Title>
             {data?.isPublic ? (
               <Flex align="baseline" gap="5px">
-                <PublicIcon />
                 <Text strong type="success">
                   Public
                 </Text>

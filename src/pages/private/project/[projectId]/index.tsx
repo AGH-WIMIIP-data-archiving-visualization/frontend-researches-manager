@@ -95,7 +95,6 @@ const Project: NextPage = () => {
           onFinish={async (formData: CreateSingleResearchkDto) => {
             const { singleResearchName } = formData;
             const research = await createResearch({
-              deviceName: "Labjack-load-cell-1",
               isPublic: projectData?.isPublic ?? false,
               singleResearchName: singleResearchName,
             });
@@ -123,10 +122,17 @@ const Project: NextPage = () => {
               <NextLink
                 key={e.id}
                 passHref
-                href={paths.project.go({ projectId: e.id })}
+                href={paths.groupInProject.go({
+                  projectId: projectData?.id ?? "",
+                  groupId: e.id,
+                })}
               >
                 <a>
-                  <GroupTile key={e.id} {...e} />
+                  <GroupTile
+                    onDelete={() => console.log("delete")}
+                    key={e.id}
+                    {...e}
+                  />
                 </a>
               </NextLink>
             ))}
@@ -150,7 +156,11 @@ const Project: NextPage = () => {
                 })}
               >
                 <a>
-                  <ResearchTile key={e.id} {...e} />
+                  <ResearchTile
+                    onDelete={() => console.log("delete")}
+                    key={e.id}
+                    {...e}
+                  />
                 </a>
               </NextLink>
             ))}

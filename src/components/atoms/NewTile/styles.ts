@@ -6,7 +6,6 @@ export const NewTile = styled.div`
   flex-flow: column nowrap;
   min-height: 200px;
   max-height: 100%;
-  border-radius: 10px;
   min-width: 0px;
   align-items: center;
   justify-content: center;
